@@ -15,9 +15,9 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
-    <link href="../app/views/user/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../app/views/user/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -109,7 +109,8 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active" style="min-height: 300px;">
-                    <img class="position-relative w-100" src="img/carousel-1.jpg"
+                    <img class="position-relative w-100"
+                        src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/carousel-1.jpg"
                         style="min-height: 300px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
@@ -120,7 +121,8 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="min-height: 300px;">
-                    <img class="position-relative w-100" src="img/carousel-2.jpg"
+                    <img class="position-relative w-100"
+                        src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/carousel-2.jpg"
                         style="min-height: 300px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
@@ -131,7 +133,8 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="min-height: 300px;">
-                    <img class="position-relative w-100" src="img/carousel-3.jpg"
+                    <img class="position-relative w-100"
+                        src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/carousel-3.jpg"
                         style="min-height: 300px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
@@ -152,7 +155,8 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <img class="img-fluid rounded mb-4 mb-lg-0" src="img/about.jpg" alt="">
+                    <img class="img-fluid rounded mb-4 mb-lg-0"
+                        src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/about.jpg" alt="">
                 </div>
                 <div class="col-lg-7">
                     <div class="text-left mb-4">
@@ -196,7 +200,8 @@
                 ?>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                        <img class="img-fluid"
+                            src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/cat-1.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
                             <h4 class="text-white font-weight-medium">Web Design</h4>
                             <span>100 Courses</span>
@@ -218,7 +223,9 @@
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="img/team-1.jpg" alt="">
+                            <img class="img-fluid"
+                                src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/team-1.jpg"
+                                alt="">
                             <div class="team-social">
                                 <a class="btn btn-outline-light btn-square mx-1" href="#"><i
                                         class="fab fa-twitter"></i></a>
@@ -237,7 +244,9 @@
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="img/team-2.jpg" alt="">
+                            <img class="img-fluid"
+                                src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/team-2.jpg"
+                                alt="">
                             <div class="team-social">
                                 <a class="btn btn-outline-light btn-square mx-1" href="#"><i
                                         class="fab fa-twitter"></i></a>
@@ -256,7 +265,9 @@
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="img/team-3.jpg" alt="">
+                            <img class="img-fluid"
+                                src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/team-3.jpg"
+                                alt="">
                             <div class="team-social">
                                 <a class="btn btn-outline-light btn-square mx-1" href="#"><i
                                         class="fab fa-twitter"></i></a>
@@ -275,7 +286,9 @@
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="">
+                            <img class="img-fluid"
+                                src="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/img/team-4.jpg"
+                                alt="">
                             <div class="team-social">
                                 <a class="btn btn-outline-light btn-square mx-1" href="#"><i
                                         class="fab fa-twitter"></i></a>
@@ -376,19 +389,19 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> -->
-    <!-- <script src="lib/easing/easing.min.js"></script> -->
-    <!-- <script src="lib/owlcarousel/owl.carousel.min.js"></script> -->
+    JavaScript Libraries
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <!-- <script src="mail/jqBootstrapValidation.min.js"></script> -->
-    <!-- <script src="mail/contact.js"></script> -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <!-- <script src="js/main.js"></script> -->
-    <!-- <script src="js/special.js"></script> -->
+    <!-- Template Javascript  -->
+    <script src="js/main.js"></script>
+    <script src="js/special.js"></script>
 </body>
 
 </html>
