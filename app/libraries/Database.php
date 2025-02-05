@@ -64,7 +64,7 @@ class Database
     }
 
     public function execute()
-    {
+{
         try {
             return $this->stmt->execute();
         } catch (PDOException $e) {

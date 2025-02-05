@@ -1,25 +1,19 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/catigory.php";
-include "../class/cours.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Student", "../index.php");
-$cours = new Cours();
-$cours->getConnection($pdo);
-$cours = new Cours();
-$cours->getConnection($pdo);
-$results = $cotigory->getCategoryCourseCounts()["categories"];
-$allCourses = $cours->listApprovedCourses();
-if ($allCourses['status'] == 1) {
-    $allCourses = $allCourses['courses'];
-}
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-$accountstatus = $validateStatus->getAccountStatus();
-if ($accountstatus == "Inactive") {
-    header("Location: inactive.php");
-}
+// include "../class/catigory.php";
+// include "../class/cours.php";
+// $cours = new Cours();
+// $cours->getConnection($pdo);
+// $results = $cotigory->getCategoryCourseCounts()["categories"];
+// $allCourses = $cours->listApprovedCourses();
+// if ($allCourses['status'] == 1) {
+//     $allCourses = $allCourses['courses'];
+// }
+// $validateStatus = new IsAccountvalidated($pdo);
+// $validateStatus->validateAccount($_COOKIE["userID"]);
+// $accountstatus = $validateStatus->getAccountStatus();
+// if ($accountstatus == "Inactive") {
+//     header("Location: inactive.php");
+// }
 
 
 
@@ -46,10 +40,9 @@ if ($accountstatus == "Inactive") {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -156,13 +149,13 @@ if ($accountstatus == "Inactive") {
             </div>
             <div class="row">
                 <?php
-                foreach ($results as $result) {
+                foreach ($data as $result) {
                     echo "<div class='col-lg-3 col-md-6 mb-4'>
                             <div class='cat-item position-relative overflow-hidden rounded mb-2'>
-                                <img class='img-fluid' src='" . $result["category_image"] . "' alt='categoryImage'>
+                                <img class='img-fluid' src='" . $result->__get("catigoryImage") . "' alt='categoryImage'>
                                 <a class='cat-overlay text-white text-decoration-none' href=''>
-                                    <h4 class='text-white font-weight-medium'>" . $result["category_name"] . "</h4>
-                                    <span>" . $result["course_count"] . " Courses</span>
+                                    <h4 class='text-white font-weight-medium'>" . $result->__get("name") . "</h4>
+                                    <span>" . $result->__get("course_count") . " Courses</span>
                                 </a>
                             </div>
                         </div>";

@@ -1,17 +1,3 @@
-<?php 
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Student", "../index.php");
-$cours = new Cours();
-$cours->getConnection($pdo);
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-$accountstatus=$validateStatus->getAccountStatus();
-if ($accountstatus=="Inactive") {
-    header("Location: inactive.php");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
