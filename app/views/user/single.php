@@ -1,25 +1,4 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/cours.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Student", "../index.php");
-$cours = new Cours();
-$cours->getConnection($pdo);
-$coursInfo = $cours->getCourseDetails($_GET["courseID"]);
-
-if ($coursInfo['status']==1) {
-    $result = $coursInfo['course'];
-}
-elseif($coursInfo['status']==0){
-    echo $coursInfo['message'];
-}
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-$accountstatus=$validateStatus->getAccountStatus();
-if ($accountstatus=="Inactive") {
-    header("Location: inactive.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,16 +15,17 @@ if ($accountstatus=="Inactive") {
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link
+        href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/lib/owlcarousel/assets/owl.carousel.min.css"
+        rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -110,12 +90,11 @@ if ($accountstatus=="Inactive") {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="about.php" class="nav-item nav-link">About</a>
-                            <a href="course.php" class="nav-item nav-link">Courses</a>
-                            <a href="teacher.php" class="nav-item nav-link">Teachers</a>
-                            <a href="myCourses.php" class="nav-item nav-link">MyCourse's</a>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                            <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                            <a href="/YoudmyMVC/User/about" class="nav-item nav-link">About</a>
+                            <a href="/YoudmyMVC/User/course" class="nav-item nav-link">Courses</a>
+                            <a href="/YoudmyMVC/User/mycours" class="nav-item nav-link">MyCourse's</a>
+                            <a href="/YoudmyMVC/User/contact" class="nav-item nav-link">Contact</a>
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"
                             href="../controllers/logout.php">Logout</a>
@@ -149,28 +128,28 @@ if ($accountstatus=="Inactive") {
             <div class="row">
                 <div class="col-lg-8">
                     <div class="mb-5">
-                        <h6 class="text-primary mb-3"><?php 
-                        echo $result['content_type']; ?></h6>
-                        <h1 class="mb-5"><?php 
-                        echo $result['title']; ?></h1>
+                        <h6 class="text-primary mb-3"><?php
+                        echo $data->__get("contentType"); ?></h6>
+                        <h1 class="mb-5"><?php
+                        echo $data->__get("title"); ?></h1>
                         <img class="img-fluid rounded w-100 mb-4" src="img/carousel-1.jpg" alt="Image">
-                        <?php 
-                         if ($result["content_type"] == "Video") {
+                        <?php
+                        if ($data->__get("contentType") == "Video") {
                             echo '<div class="relative w-full mb-4" style="padding-top: 56.25%;">
                                 <iframe 
                                     class="absolute top-0 left-0 w-full h-full rounded"
-                                    src="' . $result['video_url'] . '"
+                                    src="' . $data->__get("video_url") . '"
                                     title="Course Video"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
                             </div>';
-                        }elseif ($result["content_type"] == "Text") {
-                            echo '<p>'.$result["content"].'.</p>';
+                        } elseif ($data->__get("contentType")) {
+                            echo '<p>' . $data->__get("content") . '.</p>';
                         }
                         ?>
-                        
+
                     </div>
                 </div>
 
@@ -221,8 +200,10 @@ if ($accountstatus=="Inactive") {
                         <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
                         <div class="d-flex justify-content-start mt-4">
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-outline-light btn-square" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -240,10 +221,12 @@ if ($accountstatus=="Inactive") {
             </div>
             <div class="col-lg-5 col-md-12 mb-5">
                 <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Newsletter</h5>
-                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu
+                    kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
                 <div class="w-100">
                     <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                        <input type="text" class="form-control border-light" style="padding: 30px;"
+                            placeholder="Your Email Address">
                         <div class="input-group-append">
                             <button class="btn btn-primary px-4">Sign Up</button>
                         </div>
@@ -252,10 +235,12 @@ if ($accountstatus=="Inactive") {
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+        style="border-color: rgba(256, 256, 256, .1) !important;">
         <div class="row">
             <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white">&copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+                <p class="m-0 text-white">&copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by <a
+                        href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>
             <div class="col-lg-6 text-center text-md-right">

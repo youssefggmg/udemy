@@ -1,20 +1,4 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/student.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Student", "../index.php");
-$student = new Student($pdo);
-$myCourses = $student->viewMyCourses($_COOKIE["userROLE"]);
-if ($myCourses["status"] == 1) {
-    $results = $myCourses["data"];
-}
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-$accountstatus=$validateStatus->getAccountStatus();
-if ($accountstatus=="Inactive") {
-    header("Location: inactive.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +20,11 @@ if ($accountstatus=="Inactive") {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link
+        href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/lib/owlcarousel/assets/owl.carousel.min.css"
+        rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
@@ -116,16 +101,11 @@ if ($accountstatus=="Inactive") {
                             <div id="menu"
                                 class="hidden lg:flex flex-col lg:flex-row justify-between items-center py-4">
                                 <div class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
-                                    <a href="index.php" class="text-gray-800 hover:text-blue-600 font-medium">Home</a>
-                                    <a href="about.php" class="text-gray-800 hover:text-blue-600 font-medium">About</a>
-                                    <a href="course.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Courses</a>
-                                    <a href="teacher.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Teachers</a>
-                                    <a href="myCourses.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">MyCourse's</a>
-                                    <a href="contact.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Contact</a>
+                                    <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                                    <a href="/YoudmyMVC/User/about" class="nav-item nav-link">About</a>
+                                    <a href="/YoudmyMVC/User/course" class="nav-item nav-link">Courses</a>
+                                    <a href="/YoudmyMVC/User/mycours" class="nav-item nav-link">MyCourse's</a>
+                                    <a href="/YoudmyMVC/User/contact" class="nav-item nav-link">Contact</a>
                                 </div>
                                 <a href="../controllers/logout.php"
                                     class="hidden lg:inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200">
@@ -159,27 +139,31 @@ if ($accountstatus=="Inactive") {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Course Card 1 -->
                 <?php
-                foreach ($results as $result) {
-                    echo '<div
-                    class="bg-white rounded-2xl overflow-hidden shadow-lg transform hover:-translate-y-1 transition-all duration-300">
-                    <div class="relative">
-                        <img src="/api/placeholder/400/250" alt="Course Image" class="w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <a href="#" class="block text-xl font-bold text-gray-800 hover:text-blue-600 mb-3">
-                            ' . $result["title"] . '
-                        </a>
-                        <p class="' . $result["description"] . '.</p>
-                        <div class="border-t pt-4">
-                            <div class="flex justify-between items-center">
-                                <button
-                                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200">
-                                    <a href="./single.php?courseID=' . $result["id"] . '">view Course</a>
-                                </button>
+                if (isset($data["myCourses"])) {
+                    foreach ($data["myCourses"] as $result) {
+                        echo '<div
+                        class="bg-white rounded-2xl overflow-hidden shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="relative">
+                            <img src="/api/placeholder/400/250" alt="Course Image" class="w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <a href="#" class="block text-xl font-bold text-gray-800 hover:text-blue-600 mb-3">
+                                ' . $result->__get("title") . '
+                            </a>
+                            <p class="' . $result->__get("description") . '.</p>
+                            <div class="border-t pt-4">
+                                <div class="flex justify-between items-center">
+                                    <button
+                                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200">
+                                        <a href="/YoudmyMVC/User/single/' . $result->__get("id") . '">view Course</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>';
+                    </div>';
+                    }
+                } else {
+                    echo '<p class= "text-center text-4xl text-blue-400">you are not inrolled in any coures\'s</p>';
                 }
                 ?>
             </div>

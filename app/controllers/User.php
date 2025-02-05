@@ -6,7 +6,7 @@ class User extends Controller
     public function __construct()
     {
         Database::getInstance();
-        $roleValidaitons = new roleValidaiton($_COOKIE["userROLE"], "Student", "/pages");
+        $roleValidaitons = new roleValidaiton($_COOKIE["userROLE"], "Student", );
         $accountValidation = new IsAccountvalidated();
         $accountValidation->validateAccount($_COOKIE["userID"]);
         $accountStatus = $accountValidation->getAccountStatus();
@@ -43,6 +43,17 @@ class User extends Controller
         $Student = $this->model("Student");
         $Student->enrollInCourse($userCours[0],$userCours[1]);
         header("location: /YoudmyMVC/user/course");
+    }
+    public function mycours(){
+        $student = $this->model("Student");
+        $myCourses = $student->viewMyCourses($_COOKIE["userID"])["data"];
+        $data = ["myCourses"=>$myCourses];
+        $this->view("/user/myCourses");
+    }
+    public function single($id){
+        $cours = $this->model("Cours");
+        $coursData = $cours->getCourseDetails($id[0])["course"];
+        $this->view("/user/single",$coursData);
     }
 }
 ?>

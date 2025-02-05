@@ -1,5 +1,4 @@
 <?php
-include "../models/user.php";
 class Student extends User
 {
     public function __construct()

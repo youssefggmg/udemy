@@ -2,8 +2,7 @@
 // for some unKnown reason, the code is not working as expected uless I included the files this way 
 include "C:/xampp/htdocs/YoudmyMVC/app/Helpers/signUpSanitze.php";
 
-class User
-{
+class User{
     protected ?int $id = null;
     protected ?string $name = null;
     protected ?string $email = null;
@@ -91,7 +90,7 @@ class User
                 return ['status' => 0, 'message' => 'Email not found.'];
             }
             if (password_verify($password, $user['password'])) {
-                return ['status' => 1, 'message' => [new User($user['id'], $user['name'], $user['email'], $user['user_type'])]];
+                return ['status' => 1, 'message' => new User($user['id'], $user['user_type'], $user['email'], $user['user_type'])];
             }
             return ['status' => 0, 'message' => 'Invalid email or password.'];
         } catch (PDOException $e) {
