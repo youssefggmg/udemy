@@ -175,7 +175,7 @@ class Cours
         try {
             $query = "SELECT * FROM Course WHERE status = 'accepted'";
             $this->db->query($query);
-            $executed = $this->db->execute();
+            $this->db->execute();
 
             $this->db->resultSet();
             $courses = $theCourses = [];
@@ -184,7 +184,7 @@ class Cours
                 $theCourses[] = new Cours($course["id"] ?? "", $course["title"] ?? "", $course["description"] ?? "", $course["content"] ?? "", $course["vedio_url"] ?? "", $course["status"] ?? "", $course["content_type"] ?? "");
             }
 
-            if ($executed) {
+            if (!empty($theCourses)) {
                 return ["status" => 1, "courses" => $theCourses];
             } else {
                 return ["status" => 0, "message" => "No approved courses found."];

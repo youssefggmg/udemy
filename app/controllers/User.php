@@ -29,10 +29,20 @@ class User extends Controller
     public function course(){
         $categorie = $this->model("Categorie");
         $Cours = $this->model("Cours");
-        $approvedCours = $Cours->listApprovedCourses()["courses"];
+        $coursStatus = $Cours->listApprovedCourses()["status"];
+        if ($coursStatus==0) {
+            $approvedCours = $Cours->listApprovedCourses()["message"];
+        }else {
+            $approvedCours = $Cours->listApprovedCourses()["courses"];
+        }
         $categories=$categorie->listCategories()["categories"];
-        $data = ["categories"=>$categories];
+        $data = ["categories"=>$categories,"courses"=>$approvedCours,"coursStatus"=>$coursStatus];
         $this->view("/user/course",$data);
+    }
+    public function enroll($userCours){
+        $Student = $this->model("Student");
+        $Student->enrollInCourse($userCours[0],$userCours[1]);
+        header("location: /YoudmyMVC/user/course");
     }
 }
 ?>
