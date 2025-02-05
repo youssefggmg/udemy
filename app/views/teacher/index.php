@@ -1,38 +1,3 @@
-<?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/catigory.php";
-include "../helper/isAccountvalidated.php";
-include "../class/Teacher.php";
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Teacher", "../index.php");
-
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-
-$accountstatus = $validateStatus->getAccountStatus();
-if ($accountstatus == "Inactive") {
-    header("Location: inactive.php");
-}
-
-$cours = new Cours();
-$cours->getConnection($pdo);
-$results = $cotigory->getCategoryCourseCounts()["categories"];
-
-
-
-$Teacher = new Teacher($pdo);
-$statiscs = [];
-$result = $Teacher->viewCourseStatistics($_COOKIE["userID"]);
-if ($result['status'] == 1) {
-    $statiscs = $result['result'];
-} else {
-    die($result['message']);
-}
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,10 +16,11 @@ if ($result['status'] == 1) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/lib/owlcarousel/assets/owl.carousel.min.css"
+        rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/gh/youssefggmg/udemy/app/views/user/css/style.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
@@ -121,12 +87,11 @@ if ($result['status'] == 1) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="about.php" class="nav-item nav-link">About</a>
-                            <a href="createCourse.php" class="nav-item nav-link">Add Cours</a>
-                            <a href="teacher.php" class="nav-item nav-link">Teachers</a>
-                            <a href="myCourses.php" class="nav-item nav-link">MyCourse's</a>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                            <a href="/YoudmyMVC/Teacher/about" class="nav-item nav-link">About</a>
+                            <a href="/YoudmyMVC/Teacher/course" class="nav-item nav-link">Courses</a>
+                            <a href="/YoudmyMVC/Teacher/mycours" class="nav-item nav-link">MyCourse's</a>
+                            <a href="/YoudmyMVC/Teacher/contact" class="nav-item nav-link">Contact</a>
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"
                             href="../controllers/logout.php">Logout</a>
@@ -151,7 +116,7 @@ if ($result['status'] == 1) {
                         </div>
                         <div class="ms-4">
                             <p class="text-muted mb-0">Total Students</p>
-                            <h3 class="fw-bold mb-0"><?php echo $statiscs['totalEnrollments']; ?></h3>
+                            <h3 class="fw-bold mb-0"><?php echo $data["coursStatistecs"]['totalEnrollments']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -170,7 +135,7 @@ if ($result['status'] == 1) {
                         </div>
                         <div class="ms-4">
                             <p class="text-muted mb-0">totalCourses Courses</p>
-                            <h3 class="fw-bold mb-0"><?php echo $statiscs['totalCourses']; ?></h3>
+                            <h3 class="fw-bold mb-0"><?php echo $data["coursStatistecs"]['totalCourses']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -188,7 +153,7 @@ if ($result['status'] == 1) {
                         </div>
                         <div class="ms-4">
                             <p class="text-muted mb-0">number of complated courses </p>
-                            <h3 class="fw-bold mb-0"><?php echo $statiscs['completedEnrollments']; ?></h3>
+                            <h3 class="fw-bold mb-0"><?php echo $data["coursStatistecs"]['completedEnrollments']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -232,13 +197,13 @@ if ($result['status'] == 1) {
             </div>
             <div class="row">
                 <?php
-                foreach ($results as $result) {
+                foreach ($data["categories"] as $result) {
                     echo "<div class='col-lg-3 col-md-6 mb-4'>
                             <div class='cat-item position-relative overflow-hidden rounded mb-2'>
-                                <img class='img-fluid' src='" . $result["category_image"] . "' alt='categoryImage'>
+                                <img class='img-fluid' src='" . $result->__get("catigoryImage") . "' alt='categoryImage'>
                                 <a class='cat-overlay text-white text-decoration-none' href=''>
-                                    <h4 class='text-white font-weight-medium'>" . $result["category_name"] . "</h4>
-                                    <span>" . $result["course_count"] . " Courses</span>
+                                    <h4 class='text-white font-weight-medium'>" . $result->__get("name") . "</h4>
+                                    <span>" . $result->__get("course_count") . " Courses</span>
                                 </a>
                             </div>
                         </div>";
