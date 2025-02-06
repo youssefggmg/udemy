@@ -48,11 +48,12 @@ class User extends Controller
         $student = $this->model("Student");
         $myCourses = $student->viewMyCourses($_COOKIE["userID"])["data"];
         $data = ["myCourses"=>$myCourses];
-        $this->view("/user/myCourses");
+        $this->view("/user/myCourses",$data);
     }
     public function single($id){
         $cours = $this->model("Cours");
         $coursData = $cours->getCourseDetails($id[0])["course"];
+
         $this->view("/user/single",$coursData);
     }
 }

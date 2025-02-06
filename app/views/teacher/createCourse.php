@@ -1,30 +1,21 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../helper/isAccountvalidated.php";
-include "../class/catigory.php";
-include "../class/tag.php";
+// include "../class/catigory.php";
+// include "../class/tag.php";
 
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Teacher", "../index.php");
-
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-
-$accountstatus = $validateStatus->getAccountStatus();
-if ($accountstatus == "Inactive") {
-    header("Location: inactive.php");
-}
-$catigory = new Category($pdo);
-$tag = new tag($pdo);
-$listTags = $tag->listTags();
-$catigorylist = $catigory->listCategories();
-if ($catigorylist['status'] == 1) {
-    $catigorylist = $catigorylist['categories'];
-}
-if ($listTags['status'] == 1) {
-    $listTags = $listTags['message'];
-}
+// $accountstatus = $validateStatus->getAccountStatus();
+// if ($accountstatus == "Inactive") {
+//     header("Location: inactive.php");
+// }
+// $catigory = new Category($pdo);
+// $tag = new tag($pdo);
+// $listTags = $tag->listTags();
+// $catigorylist = $catigory->listCategories();
+// if ($catigorylist['status'] == 1) {
+//     $catigorylist = $catigorylist['categories'];
+// }
+// if ($listTags['status'] == 1) {
+//     $listTags = $listTags['message'];
+// }
 
 ?>
 <!DOCTYPE html>
@@ -83,14 +74,11 @@ if ($listTags['status'] == 1) {
                     <div class="hidden lg:block" id="navbarCollapse">
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-4 py-0">
-                                <a href="index.php" class="nav-item text-gray-700 hover:text-blue-500 active">Home</a>
-                                <a href="about.php" class="nav-item text-gray-700 hover:text-blue-500">About</a>
-                                <a href="createCourse.php" class="nav-item text-gray-700 hover:text-blue-500">Add
-                                    Cours</a>
-                                <a href="teacher.php" class="nav-item text-gray-700 hover:text-blue-500">Teachers</a>
-                                <a href="myCourses.php"
-                                    class="nav-item text-gray-700 hover:text-blue-500">MyCourse's</a>
-                                <a href="contact.php" class="nav-item text-gray-700 hover:text-blue-500">Contact</a>
+                                <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                                <a href="/YoudmyMVC/Teacher/about" class="nav-item nav-link">About</a>
+                                <a href="/YoudmyMVC/Teacher/course" class="nav-item nav-link">Courses</a>
+                                <a href="/YoudmyMVC/Teacher/mycours" class="nav-item nav-link">MyCourse's</a>
+                                <a href="/YoudmyMVC/Teacher/contact" class="nav-item nav-link">Contact</a>
                             </div>
                             <a class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded hidden lg:block"
                                 href="../controllers/logout.php">Logout</a>
@@ -106,7 +94,7 @@ if ($listTags['status'] == 1) {
             <p class="text-sm mt-2">Fill in the details below to add a new course to the platform.</p>
         </div>
         <div class="p-8">
-            <form action="../controllers/teacher/createCourse.php" method="POST" class="space-y-6">
+            <form action="/YoudmyMVC/Teacher/CreateCours" method="POST" class="space-y-6">
                 <!-- Title -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Course Title</label>
@@ -164,9 +152,9 @@ if ($listTags['status'] == 1) {
                     <select id="category" name="category"
                         class="block w-full border border-gray-300 rounded-md px-4 py-2 text-sm shadow focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                         <option value="">Select a category</option>
-                        <?php foreach ($catigorylist as $category): ?>
-                            <option value="<?php echo $category['id']; ?>">
-                                <?php echo $category['name']; ?>
+                        <?php foreach ($data['catigoreis'] as $category): ?>
+                            <option value="<?php echo $category->__get("id"); ?>">
+                                <?php echo $category->__get("name"); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -174,19 +162,20 @@ if ($listTags['status'] == 1) {
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <?php foreach ($listTags as $tag): ?>
+                        <?php foreach ($data['tags'] as $tag): ?>
                             <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" name="tags[]" value="<?php echo htmlspecialchars($tag['id']); ?>"
+                                <input type="checkbox" name="tags[]"
+                                    value="<?php echo htmlspecialchars($tag->__get("id")); ?>"
                                     class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
                                 <span
-                                    class="ml-2 text-sm text-gray-700"><?php echo htmlspecialchars($tag['name']); ?></span>
+                                    class="ml-2 text-sm text-gray-700"><?php echo htmlspecialchars($tag->__get("name")); ?></span>
                             </label>
                         <?php endforeach; ?>
                     </div>
                 </div>
                 <div id="errorDiv"
                     class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
-                    <?php echo '<span class="block sm:inline" id="errorMessage">'.$_GET["message"].'</span>' ?>
+                    <?php echo '<span class="block sm:inline" id="errorMessage">' . $data["error"] . '</span>' ?>
                 </div>
                 <!-- Submit Button -->
                 <div class="text-center mt-6">

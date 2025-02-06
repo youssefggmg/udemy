@@ -1,23 +1,3 @@
-<?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/Teacher.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Teacher", "../index.php");
-$student = new Teacher($pdo);
-$myCourses = $student->getCoursesByTeacherId($_COOKIE["userID"]);
-
-
-if ($myCourses["status"] == 1) {
-    $results = $myCourses["data"];
-}
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-$accountstatus = $validateStatus->getAccountStatus();
-if ($accountstatus == "Inactive") {
-    header("Location: inactive.php");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,16 +98,11 @@ if ($accountstatus == "Inactive") {
                             <div id="menu"
                                 class="hidden lg:flex flex-col lg:flex-row justify-between items-center py-4">
                                 <div class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
-                                    <a href="index.php" class="text-gray-800 hover:text-blue-600 font-medium">Home</a>
-                                    <a href="about.php" class="text-gray-800 hover:text-blue-600 font-medium">About</a>
-                                    <a href="course.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Courses</a>
-                                    <a href="teacher.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Teachers</a>
-                                    <a href="myCourses.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">MyCourse's</a>
-                                    <a href="contact.php"
-                                        class="text-gray-800 hover:text-blue-600 font-medium">Contact</a>
+                                    <a href="/YoudmyMVC/Teacher" class="nav-item nav-link active">Home</a>
+                                    <a href="/YoudmyMVC/Teacher/about" class="nav-item nav-link">About</a>
+                                    <a href="/YoudmyMVC/Teacher/course" class="nav-item nav-link">Courses</a>
+                                    <a href="/YoudmyMVC/Teacher/mycours" class="nav-item nav-link">MyCourse's</a>
+                                    <a href="/YoudmyMVC/Teacher/contact" class="nav-item nav-link">Contact</a>
                                 </div>
                                 <a href="../controllers/logout.php"
                                     class="hidden lg:inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200">
@@ -161,30 +136,30 @@ if ($accountstatus == "Inactive") {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Course Card 1 -->
                 <?php
-                foreach ($results as $result) {
-                                    echo '<div
+                foreach ($data["teacherCoures"] as $result) {
+                    echo '<div
                     class="bg-white rounded-2xl overflow-hidden shadow-lg transform hover:-translate-y-1 transition-all duration-300">
                     <div class="relative">
                         <img src="/api/placeholder/400/250" alt="Course Image" class="w-full h-48 object-cover">
                     </div>
                     <div class="p-6">
                         <a href="#" class="block text-xl font-bold text-gray-800 hover:text-blue-600 mb-3">
-                            ' . $result["title"] . '
+                            ' . $result->__get("title") . '
                         </a>
-                        <p class="">' . $result["description"] . '</p>
+                        <p class="">' . $result->__get("description") . '</p>
                         <div class="border-t pt-4">
                             <div class="flex justify-between items-center space-x-4">
                                 <button
                                     class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200">
-                                    <a href="./single.php?courseID=' . $result["id"] . '">View Course</a>
+                                    <a href="/YoudmyMVC/Teacher/single/' . $result->__get("id") . '">View Course</a>
                                 </button>
                                 <button
                                     class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transform hover:scale-105 transition-all duration-200">
-                                    <a href="./editCours.php?courseID=' . $result["id"] . '">Edit</a>
+                                    <a href="/YoudmyMVC/Teacher/edit/' . $result->__get("id") . '">Edit</a>
                                 </button>
                                 <button
                                     class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transform hover:scale-105 transition-all duration-200">
-                                    <a href="../controllers/teacher/delete.php?courseID=' . $result["id"] . '" onclick="return confirm(\'Are you sure you want to delete this course?\')">Delete</a>
+                                    <a href="/YoudmyMVC/Teacher/delete' . $result->__get("id") . '" onclick="return confirm(\'Are you sure you want to delete this course?\')">Delete</a>
                                 </button>
                             </div>
                         </div>

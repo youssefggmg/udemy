@@ -87,7 +87,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                        <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                            <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
                             <a href="/YoudmyMVC/Teacher/about" class="nav-item nav-link">About</a>
                             <a href="/YoudmyMVC/Teacher/course" class="nav-item nav-link">Courses</a>
                             <a href="/YoudmyMVC/Teacher/mycours" class="nav-item nav-link">MyCourse's</a>
@@ -153,7 +153,8 @@
                         </div>
                         <div class="ms-4">
                             <p class="text-muted mb-0">number of complated courses </p>
-                            <h3 class="fw-bold mb-0"><?php echo $data["coursStatistecs"]['completedEnrollments']; ?></h3>
+                            <h3 class="fw-bold mb-0"><?php echo $data["coursStatistecs"]['completedEnrollments']; ?>
+                            </h3>
                         </div>
                     </div>
                 </div>

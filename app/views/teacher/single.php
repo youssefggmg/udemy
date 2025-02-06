@@ -1,24 +1,16 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/cours.php";
-include "../helper/isAccountvalidated.php";
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Teacher", "../index.php");
-$cours = new Cours();
-$cours->getConnection($pdo);
-$coursInfo = $cours->getCourseDetails($_GET["courseID"]);
+// include "../instance/instace.php";
+// include "../class/cours.php";
+// $cours = new Cours();
+// $cours->getConnection($pdo);
+// $coursInfo = $cours->getCourseDetails($_GET["courseID"]);
 
-if ($coursInfo['status']==1) {
-    $result = $coursInfo['course'];
-}
-elseif($coursInfo['status']==0){
-    echo $coursInfo['message'];
-}
-$validateStatus = new IsAccountvalidated($pdo);
-$accountstatus=$validateStatus->getAccountStatus();
-if ($accountstatus=="Inactive") {
-    header("Location: inactive.php");
-}
+// if ($coursInfo['status']==1) {
+//     $result = $coursInfo['course'];
+// }
+// elseif($coursInfo['status']==0){
+//     echo $coursInfo['message'];
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -148,25 +140,25 @@ if ($accountstatus=="Inactive") {
             <div class="row">
                 <div class="col-lg-8">
                     <div class="mb-5">
-                        <h6 class="text-primary mb-3"><?php 
-                        echo $result['content_type']; ?></h6>
-                        <h1 class="mb-5"><?php 
-                        echo $result['title']; ?></h1>
+                        <h6 class="text-primary mb-3">><?php
+                        echo $data->__get("contentType"); ?></h6>
+                        <h1 class="mb-5"><?php
+                        echo $data->__get("title"); ?></h1>
                         <img class="img-fluid rounded w-100 mb-4" src="img/carousel-1.jpg" alt="Image">
-                        <?php 
-                         if ($result["content_type"] == "Video") {
+                        <?php
+                        if ($data->__get("contentType") == "Video") {
                             echo '<div class="relative w-full mb-4" style="padding-top: 56.25%;">
                                 <iframe 
                                     class="absolute top-0 left-0 w-full h-full rounded"
-                                    src="' . $result['video_url'] . '"
+                                    src="' . $data->__get("video_url") . '"
                                     title="Course Video"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
                             </div>';
-                        }elseif ($result["content_type"] == "Text") {
-                            echo '<p>'.$result["content"].'.</p>';
+                        } elseif ($data->__get("contentType")) {
+                            echo '<p>' . $data->__get("content") . '.</p>';
                         }
                         ?>
                         

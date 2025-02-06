@@ -1,34 +1,4 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../helper/isAccountvalidated.php";
-include "../class/catigory.php";
-include "../class/tag.php";
-include "../class/cours.php";
-
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Teacher", "../index.php");
-
-$validateStatus = new IsAccountvalidated($pdo);
-$validateStatus->validateAccount($_COOKIE["userID"]);
-
-$accountstatus = $validateStatus->getAccountStatus();
-if ($accountstatus == "Inactive") {
-    header("Location: inactive.php");
-}
-$catigory = new Category($pdo);
-$tag = new tag($pdo);
-$cours = new Cours();
-$cours->getConnection($pdo);
-$coursinfo = $cours->getCourseDetails($_GET["courseID"])['course'];
-$listTags = $tag->listTags();
-$catigorylist = $catigory->listCategories();
-if ($catigorylist['status'] == 1) {
-    $catigorylist = $catigorylist['categories'];
-}
-if ($listTags['status'] == 1) {
-    $listTags = $listTags['message'];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,14 +66,11 @@ if ($listTags['status'] == 1) {
                     <div class="hidden lg:block" id="navbarCollapse">
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-4 py-0">
-                                <a href="index.php" class="nav-item text-gray-700 hover:text-blue-500 active">Home</a>
-                                <a href="about.php" class="nav-item text-gray-700 hover:text-blue-500">About</a>
-                                <a href="createCourse.php" class="nav-item text-gray-700 hover:text-blue-500">Add
-                                    Cours</a>
-                                <a href="teacher.php" class="nav-item text-gray-700 hover:text-blue-500">Teachers</a>
-                                <a href="myCourses.php"
-                                    class="nav-item text-gray-700 hover:text-blue-500">MyCourse's</a>
-                                <a href="contact.php" class="nav-item text-gray-700 hover:text-blue-500">Contact</a>
+                            <a href="/YoudmyMVC/User" class="nav-item nav-link active">Home</a>
+                            <a href="/YoudmyMVC/Teacher/about" class="nav-item nav-link">About</a>
+                            <a href="/YoudmyMVC/Teacher/course" class="nav-item nav-link">Courses</a>
+                            <a href="/YoudmyMVC/Teacher/mycours" class="nav-item nav-link">MyCourse's</a>
+                            <a href="/YoudmyMVC/Teacher/contact" class="nav-item nav-link">Contact</a>
                             </div>
                             <a class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded hidden lg:block"
                                 href="../controllers/logout.php">Logout</a>
@@ -119,7 +86,7 @@ if ($listTags['status'] == 1) {
             <p class="text-sm mt-2">Fill in the details below to add a new course to the platform.</p>
         </div>
         <div class="p-8">
-            <form action="../controllers/teacher/updateCours.php" method="POST" class="space-y-6">
+            <form action="/YoudmyMVC/Teacher/CreateCours" method="POST" class="space-y-6">
                 <!-- Title -->
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($coursinfo['title']); ?>"
                     class="block w-full border border-gray-300 rounded-md px-4 py-2 text-sm shadow focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
@@ -145,17 +112,17 @@ if ($listTags['status'] == 1) {
                 <!-- Video URL or Text Content -->
                 <div class="space-y-4">
                     <input type="url" id="video_url" name="video_url"
-                        value="<?php echo ($coursinfo['content_type'] === 'Video') ? htmlspecialchars($coursinfo['content']) : ''; ?>"
+                        value="<?php echo ($data['coursInfo']->__get("content_type") === 'Video') ? htmlspecialchars($data['coursInfo']->__get("content")) : ''; ?>"
                         class="block w-full border border-gray-300 rounded-md px-4 py-2 text-sm shadow focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                        placeholder="Enter Video URL" <?php echo ($coursinfo['content_type'] !== 'Video') ? 'disabled' : ''; ?>>
+                        placeholder="Enter Video URL" <?php echo ($data['coursInfo']->__get("content_type") !== 'Video') ? 'disabled' : ''; ?>>
 
                     <textarea id="content" name="content" rows="4"
                         class="block w-full border border-gray-300 rounded-md px-4 py-2 text-sm shadow focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                        placeholder="Enter Text Content" <?php echo ($coursinfo['content_type'] !== 'Text') ? 'disabled' : ''; ?>><?php echo ($coursinfo['content_type'] === 'Text') ? htmlspecialchars($coursinfo['content']) : ''; ?></textarea>
+                        placeholder="Enter Text Content" <?php echo ($data['coursInfo']->__get("content_type") !== 'Text') ? 'disabled' : ''; ?>><?php echo ($data['coursInfo']->__get("content_type") === 'Text') ? htmlspecialchars($data['coursInfo']->__get("content")) : ''; ?></textarea>
                 </div>
 
                 <!-- Hidden course ID -->
-                <input type="hidden" name="course_id" value="<?php echo $_GET['courseID']; ?>">
+                <input type="hidden" name="course_id" value="<?php echo $data['coursInfo']->__get("id"); ?>">
 
                 <!-- Update button -->
                 <button type="submit"
