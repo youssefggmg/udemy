@@ -103,12 +103,12 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="tags.php" class="nav-item nav-link">tags</a>
-                            <a href="course.php" class="nav-item nav-link">Courses</a>
-                            <a href="teacher.php" class="nav-item nav-link">Teachers</a>
-                            <a href="users.php" class="nav-item nav-link">Users</a>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                            <a href="/YoudmyMVC/admine/index" class="nav-item nav-link active">Home</a>
+                            <a href="/YoudmyMVC/admine/tags" class="nav-item nav-link">tags</a>
+                            <a href="/YoudmyMVC/admine/course" class="nav-item nav-link">Courses</a>
+                            <a href="/YoudmyMVC/admine/teacher" class="nav-item nav-link">Teachers</a>
+                            <a href="/YoudmyMVC/admine/users" class="nav-item nav-link">Users</a>
+                            <a href="/YoudmyMVC/admine/contact" class="nav-item nav-link">Contact</a>
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"
                             href="../controllers/logout.php">Logout</a>
