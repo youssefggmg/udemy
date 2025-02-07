@@ -16,13 +16,9 @@ class Pages extends Controller
                 setcookie("userID", $result->__get("id"), time() + 86400, "/");
                 setcookie("userROLE", $result->__get("user_type"), time() + 86400, "/");
                 header("location: /YoudmyMVC/User");
-                var_dump("got here");
             }
         }
-    }
-    public function signin()
-    {
-    }
+    } 
     public function sign()
     {
         $this->view("signup");

@@ -18,7 +18,7 @@ class User extends Controller
         $categorie = $this->model("Categorie");
         $categories=$categorie->listCategories()["categories"];
         $data = ["categories"=>$categories];
-        $this->view("user/index",[]);
+        $this->view("user/index",$data);
     }
     public function inactive(){
         $this->view("/user/inactive");

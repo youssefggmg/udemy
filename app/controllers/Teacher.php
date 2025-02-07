@@ -21,7 +21,7 @@ class Teacher extends Controller
         $CoursStatistcs = $Teacher->viewCourseStatistics($_COOKIE["userID"]);
         $categories = $categorie->listCategories()["categories"];
         $data = ["categories" => $categories, "coursStatistecs" => $CoursStatistcs];
-        $this->view("teacher/index");
+        $this->view("teacher/index",$data);
     }
     public function inactive()
     {
