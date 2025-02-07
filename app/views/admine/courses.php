@@ -1,17 +1,4 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/catigory.php";
-include "../class/cours.php";
-include "../class/admine.php";
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Administrator", "../index.php");
-
-$cours = new Cours();
-$cours->getConnection($pdo);
-$category = new Category($pdo);
-$admine = new Admine($pdo);
-$allCourses = $cours->listAllCourses()["courses"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,7 +191,7 @@ $allCourses = $cours->listAllCourses()["courses"];
         <tbody>
             <!-- Sample data -->
             <?php
-            foreach ($allCourses as $acours):
+            foreach ($data as $acours):
                 ?>
                 <tr>
                     <td><?= $acours->__get("title") ?></td>

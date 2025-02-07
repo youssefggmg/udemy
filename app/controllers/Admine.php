@@ -19,5 +19,21 @@ class Admine extends Controller
         $data = ["allcourses"=>$allCourses,"coursCount"=>$coursCount,"platformStatistics"=>$platformStatistics];
         $this->view("user/index",$data);
     }
+    public function courses(){
+        $cours = $this->model("Cours");
+        $admine = $this->model("Admine");
+        $allCourses = $cours->listAllCourses()["courses"];
+        $data=["allCourses"=>$allCourses];
+        $this->view("admine/courses",$data);
+    }
+    public function single($id){
+        $cours = $this->model("Cours");
+        $coursInfo = $cours->getCourseDetails($id[0])['course'];
+        $data=["coursInfo"=>$coursInfo];
+        $this->view("admine/single",$data);
+    }
+    public function tags(){
+        $this->model( "tags");
+    }
 }
 ?>

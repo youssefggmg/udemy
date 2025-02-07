@@ -1,12 +1,8 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/admine.php";
-include "../class/tag.php";
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Administrator", "../index.php");
-$tag = new tag($pdo);
-$tagsList = $tag->listTags()["message"];
+// include "../class/admine.php";
+// include "../class/tag.php";
+// $tag = new tag($pdo);
+// $tagsList = $tag->listTags()["message"];
 ?>
 <!DOCTYPE html>
 <html>
