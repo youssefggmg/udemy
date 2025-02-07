@@ -1,20 +1,3 @@
-<?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/catigory.php";
-include "../class/cours.php";
-include "../class/admine.php";
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Administrator", "../index.php");
-
-$cours = new Cours();
-$cours->getConnection($pdo);
-$category = new Category($pdo);
-$admine = new Admine($pdo);
-$allCourses = $cours->listAllCourses()["courses"];
-$results = $category->getCategoryCourseCounts()["categories"];
-$platformStatistics = $admine->generatePlatformStatistics()["message"];
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -276,12 +259,12 @@ $platformStatistics = $admine->generatePlatformStatistics()["message"];
                 <div class="text-wrapper" style="display: flex; flex-direction: column; text-align:center; width:100%">
                     <h4 class="course-name" style="font-size: 22px; font-weight: bold; color: #212529; margin: 5px 0; text-align:center">
                     <?php 
-                    echo $platformStatistics['mostEnrolledCourse']['title']; ?></h4>
+                    echo $data["platformStatistics"]['mostEnrolledCourse']['title']; ?></h4>
                     
                 </div>
             </div>
             <p style="margin-top: 15px; color: #868e96; font-size: 14px;"><?php 
-                    echo $platformStatistics['mostEnrolledCourse']['description']; ?>
+                    echo $data["platformStatistics"]['mostEnrolledCourse']['description']; ?>
                 </p>
         </div>
     </div>
@@ -297,13 +280,13 @@ $platformStatistics = $admine->generatePlatformStatistics()["message"];
             </div>
             <div class="row">
                 <?php
-                foreach ($results as $result) {
+                foreach ($data["coursCount"] as $result) {
                     echo "<div class='col-lg-3 col-md-6 mb-4'>
                             <div class='cat-item position-relative overflow-hidden rounded mb-2'>
-                                <img class='img-fluid' src='" . $result["category_image"] . "' alt='categoryImage'>
+                                <img class='img-fluid' src='" . $result->__get("category_image") . "' alt='categoryImage'>
                                 <a class='cat-overlay text-white text-decoration-none' href=''>
-                                    <h4 class='text-white font-weight-medium'>" . $result["category_name"] . "</h4>
-                                    <span>" . $result["course_count"] . " Courses</span>
+                                    <h4 class='text-white font-weight-medium'>" . $result->__get("category_name") . "</h4>
+                                    <span>" . $result->__get("course_count") . " Courses</span>
                                 </a>
                             </div>
                         </div>";

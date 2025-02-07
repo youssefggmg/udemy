@@ -6,23 +6,18 @@ class Admine extends Controller
     public function __construct()
     {
         Database::getInstance();
-        $roleValidaitons = new roleValidaiton($_COOKIE["userROLE"], "Student", );
-        $accountValidation = new IsAccountvalidated();
-        $accountValidation->validateAccount($_COOKIE["userID"]);
-        $accountStatus = $accountValidation->getAccountStatus();
-        if ($accountStatus == "Inactive") {
-            header("Location: /YoudmyMVC/user/inactive");
-        }
+        $roleValidaitons = new roleValidaiton($_COOKIE["userROLE"], "Admine", );
     }
-    public function inactive()
+    public function index()
     {
-        $this->view("/admine/inactive");
-    }
-    public function index(){
-        $categorie = $this->model("Categorie");
-        $categories=$categorie->listCategories()["categories"];
-        $data = ["categories"=>$categories];
-        $this->view("user/index",);
+        $cours = $this->model("Cours");
+        $category = $this->model("Catigorie");
+        $admine = $this->model("Admine");
+        $allCourses = $cours->listAllCourses()["courses"];
+        $coursCount = $category->getCategoryCourseCounts()["categories"];
+        $platformStatistics = $admine->generatePlatformStatistics()["message"];
+        $data = ["allcourses"=>$allCourses,"coursCount"=>$coursCount,"platformStatistics"=>$platformStatistics];
+        $this->view("user/index",$data);
     }
 }
 ?>
