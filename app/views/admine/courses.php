@@ -213,7 +213,7 @@
                             <button class="view-btn"><a href="single.php?courseID=<?= $acours->__get("id") ?>">View
                                     Content</a></button>
                             <button class="delete-btn"><a
-                                    href="../controllers/admine/deletecourse.php?courseID=<?= $acours->__get("id") ?>">Delete</a></button>
+                                    href="/YoudmyMVC/Admine/deleteCourse/<?= $acours->__get("id") ?>">Delete</a></button>
                         </div>
                     </td>
                 </tr>
@@ -223,7 +223,7 @@
     <script>
         function updateStatus(selectElement, courseId) {
             const newStatus = selectElement.value;
-            fetch(`../controllers/admine/changeCoursStatus.php?id=${courseId}&status=${newStatus}`)
+            fetch(` /YoudmyMVC/Admine/updateCourseStatus/${courseId}/${newStatus}`)
         }
     </script>
 

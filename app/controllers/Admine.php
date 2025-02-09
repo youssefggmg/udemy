@@ -27,6 +27,17 @@ class Admine extends Controller
         $data = ["allCourses" => $allCourses];
         $this->view("admine/courses", $data);
     }
+    public function updateCourseStatus($id)
+    {
+        $cours = $this->model("Cours");
+        $cours->changeStatus($id[0], $id[1]);
+    }
+    public function deleteCourse($id)
+    {
+        $cours = $this->model("Cours");
+        $cours->deleteCourse($id[0]);
+        header("location: /YoudmyMVC/Admine/courses");
+    }
     public function single($id)
     {
         $cours = $this->model("Cours");
@@ -59,5 +70,28 @@ class Admine extends Controller
         }
         $data = ["allTags" => $allTags];
         $this->view("admine/tags", $data);
+    }
+    public function deleteTag($id)
+    {
+        $tag = $this->model("tags");
+        $tag->deleteTag($id[0]);
+    }
+    public function Users()
+    {
+        $admine = $this->model("Admine");
+        $allStudents = $admine->getAllStudents()["message"];
+        $allTeachers = $admine->getTeachersAccount()["message"];
+        $data= [ "allStudents" => $allStudents, "allTeachers" => $allTeachers];
+        $this->view("admine/users", $data);
+    }
+    public function activateUser($id){
+        $admine = $this->model("Admine");
+        $admine->activateUser($id[0]);
+        header("location: /YoudmyMVC/Admine/Users");
+    }
+    public function disActivate($id){
+        $admine = $this->model("Admine");
+        $admine->DeactivateUser($id[0]);
+        header("location: /YoudmyMVC/Admine/Users");
     }
 }

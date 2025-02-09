@@ -1,12 +1,8 @@
 <?php
-include "../rolleValidation/roleValidaiton.php";
-include "../instance/instace.php";
-include "../class/admine.php";
-
-$roleValidaiton = new RoleValidaiton($_COOKIE["userROLE"], "Administrator", "../index.php");
-$admine = new Admine($pdo);
-$allStudents = $admine->getAllStudents()["message"];
-$allTeachers = $admine->getTeachersAccount()["message"];
+// include "../class/admine.php";
+// $admine = new Admine($pdo);
+// $allStudents = $admine->getAllStudents()["message"];
+// $allTeachers = $admine->getTeachersAccount()["message"];
 ?>
 <!DOCTYPE html>
 <html>
@@ -122,7 +118,7 @@ $allTeachers = $admine->getTeachersAccount()["message"];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($allStudents as $student): ?>
+                        <?php foreach ($data["allStudents"] as $student): ?>
 
                             <tr>
                                 <td><?= $student["name"] ?></td>
@@ -136,12 +132,12 @@ $allTeachers = $admine->getTeachersAccount()["message"];
                                     <div class="action-buttons">
                                         <?php if ($student["account_status"] == "Inactive"): ?>
                                             <button class="btn btn-activate">
-                                                <a href="../controllers/activate.php?userID=<?= $student["id"] ?>">Activate</a>
+                                                <a href="/YoudmyMVC/Admine/activateUser>">Activate</a>
                                             </button>
                                         <?php else: ?>
                                             <button class="btn btn-deactivate">
                                                 <a
-                                                    href="../controllers/disActivate.php?userID=<?= $student["id"] ?>">Deactivate</a>
+                                                    href="/YoudmyMVC/Admine/disActivate>">Deactivate</a>
                                             </button>
                                         <?php
                                         endif; ?>
@@ -163,7 +159,7 @@ $allTeachers = $admine->getTeachersAccount()["message"];
             <div class="table-container">
                 <table id="teachersTable">
                     <thead>
-                        <?php foreach ($allTeachers as $teacher): ?>
+                        <?php foreach ($data["allTeachers"] as $teacher): ?>
                             <tr>
                                 <td><?= $teacher["name"] ?></td>
                                 <td class="user-email"><?= $teacher["email"] ?></td>

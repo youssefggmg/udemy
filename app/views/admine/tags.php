@@ -197,7 +197,7 @@
 
         function deleteTag(tagId) {
             if (confirm('Are you sure you want to delete this tag?')) {
-                fetch(`../controllers/deleteTag.php?id=${tagId}`, {
+                fetch(` /YoudmyMVC/Admine/tags/${tagId}`, {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
